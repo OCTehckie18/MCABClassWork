@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -19,10 +20,14 @@ import com.example.mcabclasswork.Labs.Lab3_CampusConnectApp.EventDetails_CC
 import com.example.mcabclasswork.Labs.Lab3_CampusConnectApp.HomeScreen_CC
 import com.example.mcabclasswork.Labs.Lab3_CampusConnectApp.Notifications_CC
 import com.example.mcabclasswork.Labs.Lab3_CampusConnectApp.ProfileScreen_CC
+import com.example.mcabclasswork.Labs.Lab4_ViewModel.CounterViewModel
+import com.example.mcabclasswork.Labs.Lab4_ViewModel.Lab4_Counter
+import com.example.mcabclasswork.Labs.Lab5.Lab5_API
 import com.example.mcabclasswork.Misc.LifecycleDemo
 import com.example.mcabclasswork.Misc.LifecycleSplash
 import com.example.mcabclasswork.Misc.NavWParameter
 import com.example.mcabclasswork.Misc.ShoppingCart.ShoppingCartApp
+import com.example.mcabclasswork.Misc.ViewModalDemo.MultiViewModelScreen
 import com.example.mcabclasswork.Misc.inclass27012026.HomeScreen_Dashboard
 import com.example.mcabclasswork.Misc.inclass27012026.Profile
 import com.example.mcabclasswork.Misc.inclass27012026.Settings
@@ -100,6 +105,22 @@ class MainActivity : ComponentActivity() {
 
                         composable(Routes.ShoppingCart) {
                             ShoppingCartApp()
+                        }
+
+                        //ViewModalDemo
+                        composable(Routes.ViewModalDemo) {
+                            MultiViewModelScreen()
+                        }
+
+                        //Lab4
+                        composable(Routes.Lab4) {
+                            val c: CounterViewModel = viewModel()
+                            Lab4_Counter(c)
+                        }
+
+                        //Lab5 - API Calls
+                        composable(Routes.Lab5) {
+                            Lab5_API(navController)
                         }
                     }
                 }

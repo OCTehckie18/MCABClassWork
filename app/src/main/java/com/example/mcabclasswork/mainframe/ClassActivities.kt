@@ -20,7 +20,8 @@ fun ClassActivities(navController: NavController){
 
                 Pair({ navController.navigate(Routes.LifecycleSplash) },"In-Lab: Activity Lifecycle Demo"),
                 Pair({ navController.navigate(Routes.POPStack) },"In-Class: Dashboard Page"),
-                Pair({ navController.navigate(Routes.ShoppingCart) },"In-Class: Shopping Cart")
+                Pair({ navController.navigate(Routes.ShoppingCart) },"In-Class: Shopping Cart"),
+                Pair({navController.navigate(Routes.ViewModalDemo)}, "In-Class: View Modal Demo")
 
             ).forEach{ (id, name)->
                 item {

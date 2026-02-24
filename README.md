@@ -9,37 +9,49 @@ A comprehensive Android application built with Jetpack Compose that serves as a 
 - **Dynamic Routing**: Uses `Navigation Compose` for seamless transitions between different modules.
 
 ### Laboratory Works
+- **Lab 0: Treasure Map Game**
+  - Simple game logic demonstrating state management and random values.
 - **Lab 1: Birthday Greeting App**
-  - Interactive user interface to input names.
-  - Custom birthday greeting generation with background imagery.
-  - Demonstrates state management and layout composables.
+  - Interactive user interface to input names and generate custom greetings.
 - **Lab 2: Calculator App**
-  - Integrated calculator functionality (In Progress).
+  - Basic calculator implementation.
+- **Lab 3: Campus Connect App**
+  - A multi-screen application featuring departments, notifications, profile, and event details.
 
-### In-Class Activities
-- **Activity Lifecycle Demo**: Visualization of Android activity lifecycle states.
-- **Dashboard Page**: demonstrating UI layout and navigation stack management.
+### In-Class Activities & Demos
+- **Activity Lifecycle Demo**: Visualization of Android activity lifecycle states and splash screen.
+- **Navigation with Parameters**: Demonstration of passing data between screens.
+- **Dashboard & Profile/Settings**: UI layout and navigation stack management (PopStack).
 - **Shopping Cart**: A UI implementation of a product listing and cart system.
+- **ViewModel Demo**: Multi-ViewModel screen implementation.
 
 ## 🛠️ Tech Stack
 
 - **Language**: Kotlin
 - **UI Framework**: Jetpack Compose
 - **Navigation**: Compose Navigation
-- **Architecture**: Modern Android Architecture patterns.
+- **Architecture**: Modern Android Architecture patterns (MVVM with ViewModels)
 - **Build System**: Gradle (Kotlin DSL)
 
 ## 📁 Project Structure
 
 ```text
 app/src/main/java/com/example/mcabclasswork/
-├── MainActivity.kt          # Main Entry point with NavHost
-├── Routes.kt                # Navigation route constants
-├── HomeScreen.kt            # Main landing screen
-├── Lab1_BirthdayGreeting.kt # Birthday app implementation
-├── Lab2_Calculator.kt       # Calculator implementation
-└── mainframe/
-    └── ClassActivities.kt   # Directory for in-class exercises
+├── mainframe/               # Main application entry and core screens
+│   ├── MainActivity.kt      # Main Entry point with NavHost
+│   ├── Routes.kt            # Navigation route constants
+│   ├── HomeScreen_Main.kt   # Main landing screen
+│   ├── Labs.kt              # Labs listing screen
+│   └── ClassActivities.kt   # Class activities listing screen
+├── Labs/                    # Laboratory assignments
+│   ├── Lab0_MapGame.kt
+│   ├── Lab1_BirthdayGreeting.kt
+│   ├── Lab2_Calculator.kt
+│   └── Lab3_CampusConnectApp/
+└── Misc/                    # In-class exercises and demos
+    ├── ShoppingCart/
+    ├── ViewModalDemo/
+    └── inclass27012026/     # Dashboard, Profile, Settings
 ```
 
 ## ⚙️ Getting Started
@@ -61,6 +73,7 @@ The project utilizes several modern Android libraries:
 - `androidx.compose.material3:material3`
 - `androidx.navigation:navigation-compose`
 - `androidx.activity:activity-compose`
+- `androidx.lifecycle:lifecycle-viewmodel-compose`
 
 ---
 *Created as part of the MCAB course curriculum.*

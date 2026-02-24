@@ -20,9 +20,17 @@ object Routes {
     // Lab3 Routes
     const val Lab3 = "HomeScreen_CC"
     const val Lab3_Profile = "ProfileScreen_CC"
-    const val Lab3_Notifs = "ProfileScreen_CC"
-    const val Lab3_Event = "ProfileScreen_CC"
-    const val Lab3_Dept = "ProfileScreen_CC"
+    const val Lab3_Notifs = "Notifications_CC"
+    const val Lab3_Event = "EventDetails_CC"
+    const val Lab3_Dept = "Departments_CC"
+
+
+    //ViewModalDemo
+    const val ViewModalDemo = "ViewModalDemo"
+
+    //Lab4 Routes
+    const val Lab4 = "lab4Main"
+    const val Lab5 = "lab5"
 
 
 }
