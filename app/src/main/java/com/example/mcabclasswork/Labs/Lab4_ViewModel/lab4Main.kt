@@ -18,7 +18,7 @@ fun Lab4_Counter(counterViewModel: CounterViewModel) {
     //val count = remember { mutableStateOf(0) }
     val count = counterViewModel.count.value
 
-
+// Without ViewModel
 //    fun increment () {
 //        count.value++
 //    }
@@ -33,7 +33,7 @@ fun Lab4_Counter(counterViewModel: CounterViewModel) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Count: ${count}")
+        Text(text = "Count: $count")
         Spacer(modifier = Modifier.height(16.dp))
         Row (
             modifier = Modifier
