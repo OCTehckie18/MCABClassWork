@@ -1,5 +1,6 @@
-package com.example.mcabclasswork.Labs.Lab5
+package com.example.mcabclasswork.Labs.Lab5_Lab6
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -34,9 +35,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.mcabclasswork.BuildConfig
+import com.example.mcabclasswork.mainframe.Routes
+
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface UnsplashApiService {
@@ -45,13 +49,19 @@ interface UnsplashApiService {
         @Query("client_id") apiKey: String,
         @Query("per_page") perPage: Int = 30
     ): List<UnsplashPhoto>
-// SLC - Keyword search using Unsplash API
+
     @GET("search/photos")
     suspend fun searchPhotos(
         @Query("client_id") apiKey: String,
         @Query("query") query: String,
         @Query("per_page") perPage: Int = 30
     ): UnsplashSearchResponse
+
+    @GET("photos/{id}")
+    suspend fun getPhotoById(
+        @Path("id") id: String,
+        @Query("client_id") apiKey: String
+    ): UnsplashPhoto
 }
 
 object RetrofitInstance {
@@ -67,14 +77,13 @@ object RetrofitInstance {
 }
 
 @Composable
-fun Lab5_API(navController: NavController) {
+fun Lab5_API(navController: NavController, sharedPhotoViewModel: SharedPhotoViewModel) {
     val viewModel: UnsplashViewModel = viewModel()
     val photos by viewModel.photos
     val isLoading by viewModel.isLoading
     val error by viewModel.error
     var query by remember { mutableStateOf("") }
 
-    // Accessing the API key from BuildConfig
     val apiKey = BuildConfig.UNSPLASH_KEY
 
     LaunchedEffect(Unit) {
@@ -120,7 +129,19 @@ fun Lab5_API(navController: NavController) {
                     modifier = Modifier.fillMaxSize()
                 ) {
                     items(photos) { photo ->
-                        PhotoCard(photo)
+                        PhotoCard(
+                            photo = photo,
+                            onParcelClick = {
+                                // Pass object via SavedStateHandle (most reliable for Parcelables in Compose Nav)
+                                navController.currentBackStackEntry?.savedStateHandle?.set("photo", photo)
+                                sharedPhotoViewModel.selectPhoto(photo) // Fallback
+                                navController.navigate(Routes.Lab5_Detail)
+                            },
+                            onIdClick = {
+                                // ID approach
+                                navController.navigate("${Routes.Lab5_Detail_ByID}/${photo.id}")
+                            }
+                        )
                     }
                 }
             }
@@ -129,7 +150,7 @@ fun Lab5_API(navController: NavController) {
 }
 
 @Composable
-fun PhotoCard(photo: UnsplashPhoto) {
+fun PhotoCard(photo: UnsplashPhoto, onParcelClick: () -> Unit, onIdClick: () -> Unit) {
     Card(
         modifier = Modifier
             .padding(8.dp)
@@ -150,8 +171,20 @@ fun PhotoCard(photo: UnsplashPhoto) {
                     text = it,
                     modifier = Modifier.padding(8.dp),
                     style = MaterialTheme.typography.bodySmall,
-                    maxLines = 2
+                    maxLines = 1
                 )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(4.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Button(onClick = onParcelClick, modifier = Modifier.weight(1f), contentPadding = PaddingValues(4.dp)) {
+                    Text("Parcel", style = MaterialTheme.typography.labelSmall)
+                }
+                Spacer(modifier = Modifier.width(4.dp))
+                Button(onClick = onIdClick, modifier = Modifier.weight(1f), contentPadding = PaddingValues(4.dp)) {
+                    Text("ID", style = MaterialTheme.typography.labelSmall)
+                }
             }
         }
     }

@@ -1,0 +1,21 @@
+package com.example.mcabclasswork.Misc.database_INCLASS.data
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface WishlistDao {
+    @Query("SELECT * FROM wishlist")
+    fun getAllItems(): Flow<List<WishlistItem>>
+
+
+    @Insert
+    suspend fun insertItem(item: WishlistItem)
+
+
+    @Delete
+    suspend fun deleteItem(item: WishlistItem)
+}

@@ -25,7 +25,10 @@ fun Labs(navController: NavController){
                 Pair({ navController.navigate(Routes.Lab2) }, "Lab 2: Calculator"),
                 Pair({ navController.navigate(Routes.Lab3) }, "Lab 3: Campus Connect"),
                 Pair({ navController.navigate(Routes.Lab4) }, "Lab 4: Counter using ViewModel"),
-                Pair({ navController.navigate(Routes.Lab5) }, "Lab 5: Learn API Call"),
+                Pair({ navController.navigate(Routes.Lab5) }, "Lab 5 and 6: Learn API Call"),
+                Pair({ navController.navigate(Routes.Lab7) }, "Lab 7: Shared Preferences"),
+                Pair({ navController.navigate(Routes.Lab8) }, "Lab 8: SMS and DB")
+
 
             ).forEach { (i, name) ->
                 item {

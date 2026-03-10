@@ -1,4 +1,4 @@
-package com.example.mcabclasswork.Labs.Lab5
+package com.example.mcabclasswork.Labs.Lab5_Lab6
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -15,6 +15,9 @@ class UnsplashViewModel : ViewModel() {
 
     private val _error = mutableStateOf<String?>(null)
     val error: State<String?> = _error
+
+    private val _selectedPhoto = mutableStateOf<UnsplashPhoto?>(null)
+    val selectedPhoto: State<UnsplashPhoto?> = _selectedPhoto
 
     fun fetchPhotos(apiKey: String) {
         viewModelScope.launch {
@@ -40,6 +43,21 @@ class UnsplashViewModel : ViewModel() {
                 _photos.value = response.results
             } catch (e: Exception) {
                 _error.value = "Failed to search photos: ${e.message}"
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun fetchPhotoById(apiKey: String, photoId: String) {
+        viewModelScope.launch {
+            _isLoading.value = true
+            _error.value = null
+            try {
+                val photo = RetrofitInstance.api.getPhotoById(photoId, apiKey)
+                _selectedPhoto.value = photo
+            } catch (e: Exception) {
+                _error.value = "Failed to fetch photo details: ${e.message}"
             } finally {
                 _isLoading.value = false
             }

@@ -29,7 +29,7 @@ enum class HomeScreentabs(val title: String) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen_Main(navController: NavController) {
     val pagerState = rememberPagerState(pageCount = { HomeScreentabs.entries.size })
     val scope = rememberCoroutineScope()
 

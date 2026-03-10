@@ -31,6 +31,15 @@ object Routes {
     //Lab4 Routes
     const val Lab4 = "lab4Main"
     const val Lab5 = "lab5"
+    const val Lab5_Detail = "lab5_detail"
+    const val Lab5_Detail_ByID = "lab5_detail_by_id"
+    const val Lab7 = "lab7"
+
+    const val DBimplement = "WishlistScreen"
+
+    const val musicPlayer = "MusicPlayer"
+
+    const val Lab8 = "Lab8_main"
 
 
 }

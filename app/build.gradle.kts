@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("kotlin-parcelize")
+    id("kotlin-kapt")
 }
 
 val localProperties = Properties()
@@ -80,5 +82,26 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
     implementation(libs.coil.compose)
+
+
+    val room_version = "2.6.0"
+//    val nav_version = "2.7.5"
+    implementation("androidx.room:room-runtime:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
+    kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.navigation:navigation-compose:${nav_version}")
+
+
+    implementation("androidx.room:room-runtime:$room_version")
+    // Annotation processor for Kotlin (KSP is recommended, but KAPT works too)
+    // If using KSP, add id("com.google.devtools.ksp") to your plugins block
+    kapt("androidx.room:room-compiler:$room_version")
+    // OR ksp("androidx.room:room-compiler:$room_version")
+
+    implementation("androidx.room:room-ktx:$room_version")
+
+    // Lifecycle components
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
 
 }
